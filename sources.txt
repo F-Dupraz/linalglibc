@@ -1,0 +1,6 @@
+A survey of direct methods for sparse linear systems
+
+Yale sparse matrix package, I. The symmetric codes
+Yale Sparse Matrix Package. II. The Nonsymmetric Codes
+
+Efficient Implementation of Sparse Nonsymmetric Gaussian Elimination Without Pivoting
