@@ -1,0 +1,17 @@
+*.o
+*.a
+*.so
+*.out
+*.txt
+a.out
+main
+
+tests/bin/
+
+build/
+out/
+
+.vscode/
+
+.DS_Store
+Thumbs.db
