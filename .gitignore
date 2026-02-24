@@ -4,7 +4,6 @@
 *.out
 *.txt
 a.out
-main
 
 tests/bin/
 

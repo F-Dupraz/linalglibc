@@ -3,21 +3,44 @@
 #include "vector_ops.h"
 
 int main(void) {
-  printf("=== mat_csr_int ===\n");
-  mat_csr_int *mat = mat_csr_int_create(3, 4, 6);
-  if (!mat) { fprintf(stderr, "Error: create falló\n"); return 1; }
+  printf("=== mat_csr_int 1 ===\n");
+  mat_csr_int *mat1 = mat_csr_int_create(3, 4, 6);
+  if (!mat1) { fprintf(stderr, "Error: create falló\n"); return 1; }
 
-  mat->val[0] = 1;  mat->val[1] = 7;  mat->val[2] = 5;
-  mat->val[3] = 2;  mat->val[4] = 3;  mat->val[5] = 1;
+  mat1->val[0] = 1;  mat1->val[1] = 7;  mat1->val[2] = 5;
+  mat1->val[3] = 2;  mat1->val[4] = 3;  mat1->val[5] = 1;
 
-  mat->col[0] = 0;  mat->col[1] = 2;  mat->col[2] = 3;
-  mat->col[3] = 1;  mat->col[4] = 0;  mat->col[5] = 3;
+  mat1->col[0] = 0;  mat1->col[1] = 2;  mat1->col[2] = 3;
+  mat1->col[3] = 1;  mat1->col[4] = 0;  mat1->col[5] = 3;
 
-  mat->row_ptr[0] = 0; mat->row_ptr[1] = 3;
-  mat->row_ptr[2] = 4; mat->row_ptr[3] = 6;
+  mat1->row_ptr[0] = 0; mat1->row_ptr[1] = 3;
+  mat1->row_ptr[2] = 4; mat1->row_ptr[3] = 6;
 
-  mat_csr_int_print_dense(mat);
-  mat_csr_int_destroy(mat);
+  mat_csr_scalar_mult(mat1, 2);
+  mat_csr_print_dense(mat1);
+
+  printf("=== mat_csr_int 2 ===\n");
+  mat_csr_int *mat2 = mat_csr_int_create(3, 4, 6);
+  if (!mat2) { fprintf(stderr, "Error: create falló\n"); return 1; }
+
+  mat2->val[0] = 1;  mat2->val[1] = 7;  mat2->val[2] = 5;
+  mat2->val[3] = 2;  mat2->val[4] = 3;  mat2->val[5] = 1;
+
+  mat2->col[0] = 1;  mat2->col[1] = 2;  mat2->col[2] = 3;
+  mat2->col[3] = 0;  mat2->col[4] = 1;  mat2->col[5] = 2;
+
+  mat2->row_ptr[0] = 0; mat2->row_ptr[1] = 3;
+  mat2->row_ptr[2] = 4; mat2->row_ptr[3] = 6;
+
+  mat_csr_int_print_dense(mat2);
+
+  mat_csr_int *result = mat_csr_add(mat1, mat2);
+
+  printf("\n=== addition mat1 and mat2 ===\n");
+  mat_csr_int_print_dense(result);
+  mat_csr_int_destroy(mat1);
+  mat_csr_int_destroy(mat2);
+  mat_csr_int_destroy(result);
 
   printf("\n=== mat_csr_f ===\n");
   mat_csr_f *matf = mat_csr_f_create(3, 4, 6);
@@ -34,7 +57,7 @@ int main(void) {
 
   mat_csr_print_dense(matf);
   printf("\n");
-  mat_csr_f_scalar_mult(matf, 0.5);
+  mat_csr_scalar_mult(matf, 0.5);
   mat_csr_print_dense(matf);
   mat_csr_destroy(matf);
 
@@ -42,7 +65,7 @@ int main(void) {
   vec_i *vi = vec_i_create(4);
   vi->val[0] = 10; vi->val[1] = 0; vi->val[2] = -3; vi->val[3] = 7;
   vec_print(vi);
-  vec_i_scalar_mult(vi, 100);
+  vec_scalar_mult(vi, 100);
   vec_print(vi);
   vec_destroy(vi);
 

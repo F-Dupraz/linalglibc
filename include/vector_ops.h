@@ -18,9 +18,11 @@
 #define VEC_ZERO   0.0
 #include "vector_ops_impl.h"
 
-/* ── API ────────────────────────────────────────── */
-#define vec_i_scalar_mult(v, s) vec_i_scalar_mult((v), (s))
-#define vec_f_scalar_mult(v, s) vec_f_scalar_mult((v), (s))
-#define vec_d_scalar_mult(v, s) vec_d_scalar_mult((v), (s))
+/* ── API genérica vía _Generic (C11) ────────────────────────────────────── */
+#define vec_scalar_mult(vec, s) _Generic((vec),  \
+  vec_i*: vec_i_scalar_mult,              \
+  vec_f*: vec_f_scalar_mult,               \
+  vec_d*: vec_d_scalar_mult                 \
+)(vec, s)
 
 #endif /* VEC_OPS_H */

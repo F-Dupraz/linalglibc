@@ -5,4 +5,4 @@ Yale Sparse Matrix Package. II. The Nonsymmetric Codes
 
 Efficient Implementation of Sparse Nonsymmetric Gaussian Elimination Without Pivoting
 
-// gcc ./main.c -Wall -Wextra -std=c11 -Iinclude -Isrc -o mai
+// gcc ./main.c -Wall -Wextra -std=c11 -Iinclude -Isrc -o ./build/main
